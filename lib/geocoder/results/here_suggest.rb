@@ -1,5 +1,5 @@
-module GeocoderHereMaps
-  class Geocoder::Result::HereAutocomplete < Geocoder::Result::Here
+module Geocoder::Result
+  class HereSuggest < Base
     def address(format = :full)
       @data['label']
     end

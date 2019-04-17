@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     geocoder_here_maps (0.1.0)
-      geocoder
+      geocoder (~> 1.5.1)
 
 GEM
   remote: https://rubygems.org/

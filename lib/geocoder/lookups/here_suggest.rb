@@ -1,11 +1,11 @@
-module GeocoderHereMaps
-  class Geocoder::Lookup::HereAutocomplete < Geocoder::Lookup::Here
+module Geocoder::Lookup
+  class HereSuggest < Base
     def name
       "HereAutocomplete"
     end
 
-    def query_url(query)
-     base_query_url(query) + url_query_string(query)
+    def required_api_key_parts
+      ["app_id", "app_code"]
     end
 
     private
@@ -48,6 +48,18 @@ module GeocoderHereMaps
       super.merge(query_url_here_options(query)).merge(
         query: query.sanitized_text
       )
+    end
+
+    def api_key
+      if (a = configuration.api_key)
+        return a.first if a.is_a?(Array)
+      end
+    end
+
+    def api_code
+      if (a = configuration.api_key)
+        return a.last if a.is_a?(Array)
+      end
     end
   end
 end
