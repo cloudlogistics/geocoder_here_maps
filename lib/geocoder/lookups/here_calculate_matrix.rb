@@ -11,7 +11,7 @@ module Geocoder::Lookup
     private
 
     def base_query_url(query)
-      "#{protocol}://autocomplete.geocoder.api.here.com/routing/7.2/calculatematrix.json?"
+      "#{protocol}://autocomplete.geocoder.api.here.com/routing/7.2/calculatematrix.json"
     end
 
     def results(query)
