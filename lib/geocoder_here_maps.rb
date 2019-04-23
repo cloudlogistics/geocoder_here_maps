@@ -1,12 +1,17 @@
 require 'geocoder'
 require "geocoder_here_maps/version"
+
 require "geocoder/lookups/here_suggest"
 require "geocoder/results/here_suggest"
+
+require "geocoder/lookups/here_calculate_matrix"
+require "geocoder/results/here_calculate_matrix"
 
 module GeocoderHereMaps
   class << self
     def load
       Geocoder::Lookup.street_services += [:here_suggest]
+      Geocoder::Lookup.street_services += [:here_calculate_matrix]
     end
   end
 
