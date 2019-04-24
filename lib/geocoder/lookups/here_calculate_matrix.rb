@@ -28,30 +28,19 @@ module Geocoder::Lookup
     end
 
     def query_url_here_options(query)
-      query_options = query.options
-
       options = {
         app_id: api_key,
         app_code: api_code,
         language: (query.language || configuration.language)
       }
-
-      unless (country = query_options[:country]).nil?
-        options[:country] = country
-      end
-
-      unless (mapview = query_options[:bounds]).nil?
-        options[:mapview] = mapview.map{ |point| "%f,%f" % point }.join(';')
-      end
-
-      query_options.slice!(:bounds, :country)
-
-      options.merge(query_options)
     end
 
     def query_url_params(query)
+      query_params = query.to_param
+
       super.merge(query_url_here_options(query)).merge(
-        query: query.sanitized_text
+        waypoint0: query_params[0].join(','),
+        waypoint1: query_params[1].join(',')
       )
     end
 

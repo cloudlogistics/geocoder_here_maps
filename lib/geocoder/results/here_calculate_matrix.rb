@@ -1,5 +1,12 @@
 module Geocoder::Result
   class HereCalculateMatrix < Base
+
+    def initialize(data)
+      binding.pry
+      @data = data
+      @cache_hit = nil
+    end
+
     def address(format = :full)
       @data['label']
     end
