@@ -10,8 +10,7 @@ require "geocoder/results/here_calculate_matrix"
 module GeocoderHereMaps
   class << self
     def load
-      Geocoder::Lookup.street_services += [:here_suggest]
-      Geocoder::Lookup.street_services += [:here_calculate_matrix]
+      Geocoder::Lookup.street_services += %i[here_suggest here_calculate_matrix]
     end
   end
 
