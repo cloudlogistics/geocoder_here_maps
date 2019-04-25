@@ -11,14 +11,14 @@ module Geocoder::Lookup
     private
 
     def base_query_url(query)
-      "#{protocol}://autocomplete.geocoder.api.here.com/routing/7.2/calculatematrix.json"
+      "#{protocol}://route.api.here.com/routing/7.2/calculateroute.json?"
     end
 
     def results(query)
       return [] unless doc = fetch_data(query)
-      return [] unless doc['suggestions']
+      return [] unless doc["response"]["route"]
 
-      r = doc['suggestions']
+      r = doc["response"]["route"]
 
       if r.is_a?(Array)
         return r
