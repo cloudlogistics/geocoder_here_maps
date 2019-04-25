@@ -1,50 +1,56 @@
 module Geocoder::Result
-  class HereCalculateMatrix < Base
+  class HereCalculateMatrix
+    # data (hash) fetched from geocoding service
+    attr_accessor :data
 
+    # true if result came from cache, false if from request to geocoding
+    # service; nil if cache is not configured
+    attr_accessor :cache_hit
+
+    ##
+    # Takes a hash of data from a parsed geocoding service response.
+    #
     def initialize(data)
       @data = data
       @cache_hit = nil
     end
 
-    def address(format = :full)
-      @data['label']
+    def waypoint
+      @data['waypoint']
     end
 
-    ##
-    # A two-element array: [lat, lon].
-    #
-    def coordinates
-      fail
+    def leg
+      @data['leg']
     end
 
-    def country
-      address_data['country']
+    def maneuver
+      leg['maneuver']
     end
 
-    def state
-      address_data['state']
+    def mode
+      @data['mode']
     end
 
-    def county
-      address_data['county']
+    def distance
+      summary_data['distance']
     end
 
-    def city
-      address_data['city']
+    def travel_time
+      summary_data['travelTime']
     end
 
-    def postal_code
-      address_data['postalCode']
+    def traffic_time
+      summary_data['trafficTime']
     end
 
-    def location_id
-      @data['locationId']
+    def base_time
+      summary_data['baseTime']
     end
 
     private # ----------------------------------------------------------------
 
-    def address_data
-      @data['address'] || fail
+    def summary_data
+      @data['summary']
     end
   end
 end
