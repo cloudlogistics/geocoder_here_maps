@@ -1,5 +1,5 @@
 module Geocoder::Result
-  class HereCalculateMatrix
+  class HereCalculateRoute
     # data (hash) fetched from geocoding service
     attr_accessor :data
 

@@ -1,5 +1,5 @@
 module Geocoder::Lookup
-  class HereCalculateMatrix < Base
+  class HereCalculateRoute < Base
     def name
       "HereCalculateMatrix"
     end
@@ -36,11 +36,8 @@ module Geocoder::Lookup
     end
 
     def query_url_params(query)
-      query_params = query.to_param
-
       super.merge(query_url_here_options(query)).merge(
-        waypoint0: query_params[0].join(','),
-        waypoint1: query_params[1].join(',')
+        mode: query.sanitized_text
       )
     end
 
