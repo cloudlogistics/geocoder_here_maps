@@ -36,9 +36,9 @@ module Geocoder::Lookup
     end
 
     def query_url_params(query)
-      super.merge(query_url_here_options(query)).merge(
-        mode: query.sanitized_text
-      )
+      query_params = query.to_param
+
+      super.merge(query_url_here_options(query)).merge(query_params)
     end
 
     def api_key
