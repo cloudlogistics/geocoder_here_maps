@@ -1,7 +1,7 @@
 module Geocoder::Lookup
   class HereCalculateRoute < Base
     def name
-      "HereCalculateMatrix"
+      "HereCalculateRoute"
     end
 
     def required_api_key_parts
@@ -36,9 +36,15 @@ module Geocoder::Lookup
     end
 
     def query_url_params(query)
-      query_params = query.to_param
+      super.merge(query_url_here_options(query)).merge(
+        waypoints_hash(query.to_param)
+      )
+    end
 
-      super.merge(query_url_here_options(query)).merge(query_params)
+    def waypoints_hash(waypoints)
+      waypoints.each_with_object({}).with_index do |(point, hash), index|
+        hash["waypoint#{index}"] = point.join(',')
+      end
     end
 
     def api_key

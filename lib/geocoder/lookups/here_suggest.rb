@@ -1,7 +1,7 @@
 module Geocoder::Lookup
   class HereSuggest < Base
     def name
-      "HereAutocomplete"
+      "HereSuggest"
     end
 
     def required_api_key_parts
@@ -33,8 +33,6 @@ module Geocoder::Lookup
         app_code: api_code,
         language: (query.language || configuration.language)
       }
-
-      options
     end
 
     def query_url_params(query)
