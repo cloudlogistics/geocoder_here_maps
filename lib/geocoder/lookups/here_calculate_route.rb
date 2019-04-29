@@ -1,7 +1,7 @@
 module Geocoder::Lookup
-  class HereSuggest < Base
+  class HereCalculateRoute < Base
     def name
-      "HereSuggest"
+      "HereCalculateRoute"
     end
 
     def required_api_key_parts
@@ -11,15 +11,15 @@ module Geocoder::Lookup
     private
 
     def base_query_url(query)
-      "#{protocol}://autocomplete.geocoder.api.here.com/6.2/suggest.json?"
+      "#{protocol}://route.api.here.com/routing/7.2/calculateroute.json?"
     end
 
     def results(query)
       return [] unless doc = fetch_data(query)
-      return [] unless doc['suggestions']
+      return [] unless doc["response"]["route"]
 
-      r = doc['suggestions']
- 
+      r = doc["response"]["route"]
+
       if r.is_a?(Array)
         return r
       else
@@ -37,8 +37,14 @@ module Geocoder::Lookup
 
     def query_url_params(query)
       super.merge(query_url_here_options(query)).merge(
-        query: query.sanitized_text
+        waypoints_hash(query.to_param)
       )
+    end
+
+    def waypoints_hash(waypoints)
+      waypoints.each_with_object({}).with_index do |(point, hash), index|
+        hash["waypoint#{index}"] = point.join(',')
+      end
     end
 
     def api_key
