@@ -34,13 +34,6 @@ module Geocoder::Lookup
         language: (query.language || configuration.language)
       }
 
-      unless (country = query.options[:country]).nil?
-        options[:country] = country
-      end
-
-      unless (mapview = query.options[:bounds]).nil?
-        options[:mapview] = mapview.map{ |point| "%f,%f" % point }.join(';')
-      end
       options
     end
 
