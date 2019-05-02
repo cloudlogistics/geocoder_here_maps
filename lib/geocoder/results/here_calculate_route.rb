@@ -23,6 +23,10 @@ module Geocoder::Result
       @data['leg']
     end
 
+    def shape
+      @data['shape']
+    end
+
     def maneuver
       leg['maneuver']
     end
