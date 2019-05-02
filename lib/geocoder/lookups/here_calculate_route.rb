@@ -16,7 +16,7 @@ module Geocoder::Lookup
 
     def results(query)
       return [] unless doc = fetch_data(query)
-      return [] unless doc["response"]["route"]
+      return [] unless doc["response"] && doc["response"]["route"]
 
       r = doc["response"]["route"]
 
