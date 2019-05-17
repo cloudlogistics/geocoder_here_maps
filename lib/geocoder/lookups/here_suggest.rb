@@ -1,17 +1,13 @@
 module Geocoder::Lookup
-  class HereSuggest < Base
+  class HereSuggest < Geocoder::Lookup::HereBase
     def name
       "HereSuggest"
-    end
-
-    def required_api_key_parts
-      ["app_id", "app_code"]
     end
 
     private
 
     def base_query_url(query)
-      "#{protocol}://autocomplete.geocoder.api.here.com/6.2/suggest.json?"
+      "#{protocol}://#{domain(query)}/6.2/suggest.json?"
     end
 
     def results(query)
@@ -19,7 +15,7 @@ module Geocoder::Lookup
       return [] unless doc['suggestions']
 
       r = doc['suggestions']
- 
+
       if r.is_a?(Array)
         return r
       else
@@ -41,15 +37,13 @@ module Geocoder::Lookup
       )
     end
 
-    def api_key
-      if (a = configuration.api_key)
-        return a.first if a.is_a?(Array)
-      end
-    end
+    def domain(query)
+      options = query.options[:params]
 
-    def api_code
-      if (a = configuration.api_key)
-        return a.last if a.is_a?(Array)
+      if options[:cit]
+        'autocomplete.geocoder.cit.api.here.com'
+      else
+        'autocomplete.geocoder.api.here.com'
       end
     end
   end

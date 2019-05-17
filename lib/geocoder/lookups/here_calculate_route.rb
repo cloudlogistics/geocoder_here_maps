@@ -1,17 +1,13 @@
 module Geocoder::Lookup
-  class HereCalculateRoute < Base
+  class HereCalculateRoute < Geocoder::Lookup::HereBase
     def name
       "HereCalculateRoute"
-    end
-
-    def required_api_key_parts
-      ["app_id", "app_code"]
     end
 
     private
 
     def base_query_url(query)
-      "#{protocol}://route.api.here.com/routing/7.2/calculateroute.json?"
+      "#{protocol}://#{domain(query)}/routing/7.2/calculateroute.json?"
     end
 
     def results(query)
@@ -47,15 +43,13 @@ module Geocoder::Lookup
       end
     end
 
-    def api_key
-      if (a = configuration.api_key)
-        return a.first if a.is_a?(Array)
-      end
-    end
+    def domain(query)
+      options = query.options[:params]
 
-    def api_code
-      if (a = configuration.api_key)
-        return a.last if a.is_a?(Array)
+      if options[:cit]
+        'route.cit.api.here.com'
+      else
+        'route.api.here.com'
       end
     end
   end
