@@ -7,7 +7,7 @@ module Geocoder::Lookup
     private
 
     def base_query_url(query)
-      "#{protocol}://#{domain(query)}/routing/7.2/calculateroute.json?"
+      "#{protocol}://route.#{domain}/routing/7.2/calculateroute.json?"
     end
 
     def results(query)
@@ -40,16 +40,6 @@ module Geocoder::Lookup
     def waypoints_hash(waypoints)
       waypoints.each_with_object({}).with_index do |(point, hash), index|
         hash["waypoint#{index}"] = point.join(',')
-      end
-    end
-
-    def domain(query)
-      options = query.options[:params]
-
-      if options[:cit]
-        'route.cit.api.here.com'
-      else
-        'route.api.here.com'
       end
     end
   end

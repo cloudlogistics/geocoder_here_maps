@@ -21,5 +21,13 @@ module Geocoder::Lookup
         return a.last if a.is_a?(Array)
       end
     end
+
+    def domain
+      if configuration.cit
+        'cit.api.here.com'
+      else
+        'api.here.com'
+      end
+    end
   end
 end

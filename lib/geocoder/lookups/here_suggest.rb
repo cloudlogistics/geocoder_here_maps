@@ -7,7 +7,7 @@ module Geocoder::Lookup
     private
 
     def base_query_url(query)
-      "#{protocol}://#{domain(query)}/6.2/suggest.json?"
+      "#{protocol}://autocomplete.geocoder.#{domain}/6.2/suggest.json?"
     end
 
     def results(query)
@@ -35,16 +35,6 @@ module Geocoder::Lookup
       super.merge(query_url_here_options(query)).merge(
         query: query.sanitized_text
       )
-    end
-
-    def domain(query)
-      options = query.options[:params]
-
-      if options[:cit]
-        'autocomplete.geocoder.cit.api.here.com'
-      else
-        'autocomplete.geocoder.api.here.com'
-      end
     end
   end
 end
