@@ -9,3 +9,6 @@
 
 # rspec failure tracking
 .rspec_status
+lib/.DS_Store
+lib/geocoder/.DS_Store
+lib/geocoder/lookups/.DS_Store

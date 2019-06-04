@@ -1,5 +1,7 @@
 module Geocoder::Lookup
-  class HereCalculateRoute < Geocoder::Lookup::HereBase
+  class HereCalculateRoute < Base
+    include DefaultLookupMethods
+
     def name
       "HereCalculateRoute"
     end
@@ -21,14 +23,6 @@ module Geocoder::Lookup
       else
         return []
       end
-    end
-
-    def query_url_here_options(query)
-      options = {
-        app_id: api_key,
-        app_code: api_code,
-        language: (query.language || configuration.language)
-      }
     end
 
     def query_url_params(query)

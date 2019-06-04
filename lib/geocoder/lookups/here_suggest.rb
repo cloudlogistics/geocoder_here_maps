@@ -1,5 +1,7 @@
 module Geocoder::Lookup
-  class HereSuggest < Geocoder::Lookup::HereBase
+  class HereSuggest < Base
+    include DefaultLookupMethods
+
     def name
       "HereSuggest"
     end
@@ -21,14 +23,6 @@ module Geocoder::Lookup
       else
         return []
       end
-    end
-
-    def query_url_here_options(query)
-      options = {
-        app_id: api_key,
-        app_code: api_code,
-        language: (query.language || configuration.language)
-      }
     end
 
     def query_url_params(query)
