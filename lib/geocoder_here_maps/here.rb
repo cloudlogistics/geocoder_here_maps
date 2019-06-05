@@ -2,7 +2,7 @@ require "geocoder/lookups/here"
 
 module Geocoder::Lookup
   Here.class_eval do
-    include DefaultLookupMethods
+    include HereLookupDefaultMethods
 
     private
 

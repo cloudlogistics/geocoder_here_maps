@@ -1,6 +1,6 @@
 require 'geocoder'
 require "geocoder_here_maps/version"
-require "geocoder/lookups/default_lookup_methods.rb"
+require "geocoder/lookups/concerns/here_lookup_default_methods.rb"
 require "geocoder_here_maps/here"
 
 require "geocoder/lookups/here_suggest"

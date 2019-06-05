@@ -1,5 +1,5 @@
 module Geocoder::Lookup
-  module DefaultLookupMethods
+  module HereLookupDefaultMethods
     extend ActiveSupport::Concern
 
     def handle

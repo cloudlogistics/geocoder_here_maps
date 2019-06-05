@@ -1,6 +1,6 @@
 module Geocoder::Lookup
   class HereSuggest < Base
-    include DefaultLookupMethods
+    include HereLookupDefaultMethods
 
     def name
       "HereSuggest"

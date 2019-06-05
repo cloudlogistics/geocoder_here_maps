@@ -1,6 +1,6 @@
 module Geocoder::Lookup
   class HereCalculateRoute < Base
-    include DefaultLookupMethods
+    include HereLookupDefaultMethods
 
     def name
       "HereCalculateRoute"
