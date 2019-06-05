@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    geocoder_here_maps (0.1.0)
+    geocoder_here_maps (0.2.0)
       geocoder (~> 1.5.1)
 
 GEM
