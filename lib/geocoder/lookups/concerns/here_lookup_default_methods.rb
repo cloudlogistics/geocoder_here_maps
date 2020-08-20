@@ -7,7 +7,7 @@ module Geocoder::Lookup
     end
 
     def required_api_key_parts
-      ["app_key"]
+      ["api_key"]
     end
 
     def supported_protocols
@@ -18,7 +18,7 @@ module Geocoder::Lookup
 
     def query_url_here_options(query)
       options = {
-        api_key: configuration.api_key,
+        apikey: configuration.api_key,
         language: (query.language || configuration.language)
       }
     end
